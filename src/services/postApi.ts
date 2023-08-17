@@ -1,8 +1,8 @@
 import { axiosConfig } from "@/config"
 
-export const getPosts = async (): Promise<any> => {
+export const getPosts = async (url: string): Promise<any> => {
   try {
-    const resp = await axiosConfig.get("/posts")
+    const resp = await axiosConfig.get(`${url}`)
     const data = resp.data
     return data
   } catch (error) {
