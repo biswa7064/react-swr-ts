@@ -12,7 +12,7 @@ const usePost = () => {
     data: posts,
     isLoading: isLoadingPosts,
     error,
-  } = useSWR<PostType[]>(POSTS_URL, getPosts)
+  } = useSWR<PostType[]>(POSTS_URL, getPosts, { refreshInterval: 4000 })
   const postError = useMemo(() => {
     return error instanceof AxiosError ? error.message : error
   }, [error])

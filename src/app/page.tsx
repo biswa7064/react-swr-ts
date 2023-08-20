@@ -7,12 +7,14 @@ import RootLayout from "./layout"
 
 export default function Home() {
   const { posts, isLoadingPosts } = usePost()
-  const { userDetails, mutateUser } = useUser()
+  const { userDetails, mutateUser, userById, userByIdErr, isUserByIdLoading } =
+    useUser()
+  const isLoading = isLoadingPosts || !userDetails || isUserByIdLoading
   return (
     <RootLayout>
       <Header auth={userDetails} mutate={mutateUser} />
       <main className="min-h-screen p-16">
-        {isLoadingPosts || !userDetails ? (
+        {isLoading ? (
           <div className="flex min-h-screen justify-center items-center">
             Loading Posts....
           </div>

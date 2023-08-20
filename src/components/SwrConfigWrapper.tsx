@@ -9,6 +9,7 @@ const SwrConfigWrapper: FC<{ children: ReactNode; fetcher: any }> = ({
     <SWRConfig
       value={{
         fetcher,
+        revalidateOnMount: true,
       }}
     >
       {children}
