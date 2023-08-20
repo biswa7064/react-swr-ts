@@ -8,3 +8,9 @@ export const getAuthDetails = async (): Promise<UserType> => {
   }
   return response
 }
+export const setAuthDetails = async () => {
+  await localStorage.setItem(
+    "user",
+    JSON.stringify({ email: "test.user@gmail.com" })
+  )
+}

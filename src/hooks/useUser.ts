@@ -3,11 +3,13 @@ import useSWR from "swr"
 
 const useUser = () => {
   const {
-    data: userDetails,
+    data,
     error: authError,
     isLoading: isAuthLoading,
+    mutate: mutateUser,
   } = useSWR<UserType>("/user")
-  return { userDetails, authError, isAuthLoading }
+  const userDetails = data as UserType
+  return { userDetails, authError, isAuthLoading, mutateUser }
 }
 
 export default useUser

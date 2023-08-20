@@ -1,16 +1,18 @@
 "use client"
+import Header from "@/components/Header"
 import PostCard from "@/components/PostCard"
-import SwrConfigWrapper from "@/components/SwrConfigWrapper"
 import usePost from "@/hooks/usePost"
-import { getAuthDetails } from "@/services/userApi"
+import useUser from "@/hooks/useUser"
+import RootLayout from "./layout"
 
 export default function Home() {
   const { posts, isLoadingPosts } = usePost()
-
+  const { userDetails, mutateUser } = useUser()
   return (
-    <SwrConfigWrapper fetcher={getAuthDetails}>
+    <RootLayout>
+      <Header auth={userDetails} mutate={mutateUser} />
       <main className="min-h-screen p-16">
-        {isLoadingPosts ? (
+        {isLoadingPosts || !userDetails ? (
           <div className="flex min-h-screen justify-center items-center">
             Loading Posts....
           </div>
@@ -22,6 +24,6 @@ export default function Home() {
           </div>
         )}
       </main>
-    </SwrConfigWrapper>
+    </RootLayout>
   )
 }

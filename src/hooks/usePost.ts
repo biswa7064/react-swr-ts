@@ -1,8 +1,10 @@
 import { getPosts } from "@/services/postApi"
 import { AxiosError } from "axios"
-import useSWR, { Fetcher } from "swr"
+import useSWR from "swr"
 import { useMemo } from "react"
 import { PostType } from "@/types/postTypes"
+import { useEffect } from "react"
+import { setAuthDetails } from "@/services/userApi"
 
 const usePost = () => {
   const POSTS_URL = "/posts"
@@ -14,7 +16,14 @@ const usePost = () => {
   const postError = useMemo(() => {
     return error instanceof AxiosError ? error.message : error
   }, [error])
-  console.log({ posts, isLoadingPosts, postError })
+  useEffect(() => {
+    let isMount = true
+    isMount && setAuthDetails()
+    return () => {
+      isMount = false
+    }
+  }, [])
+
   return {
     posts,
     isLoadingPosts,
