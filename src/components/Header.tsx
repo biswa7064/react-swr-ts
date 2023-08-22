@@ -8,13 +8,13 @@ const Header: FC<{
 }> = ({ auth, mutate }) => {
   const handleLogout = async () => {
     await localStorage.removeItem("user")
-    mutate({ ...auth, email: undefined })
+    mutate({ ...auth, uid: undefined })
   }
   return (
     <div className="w-full p-4">
       <button
         className={`px-3 py-1 bg-cyan-500 rounded-md hover:shadow-md hover:shadow-cyan-300 font-bold float-right ${
-          auth?.email ? "" : "hidden"
+          auth?.uid ? "" : "hidden"
         }`}
         onClick={handleLogout}
       >

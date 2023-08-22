@@ -9,12 +9,14 @@ const useUser = () => {
     isLoading: isAuthLoading,
     mutate: mutateUser,
   } = useSWR<UserType>("/user")
+  const userDetails = data as UserType
   const {
     data: userById,
     error: userByIdErr,
     isLoading: isUserByIdLoading,
-  } = useSWR(["/userById", data?.uid], (args) => getUserById(args[1]))
-  const userDetails = data as UserType
+  } = useSWR(["/userById", userDetails?.uid], (args) => getUserById(args[1]), {
+    revalidateOnMount: true,
+  })
   return {
     userDetails,
     authError,

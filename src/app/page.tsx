@@ -7,9 +7,9 @@ import RootLayout from "./layout"
 
 export default function Home() {
   const { posts, isLoadingPosts } = usePost()
-  const { userDetails, mutateUser, userById, userByIdErr, isUserByIdLoading } =
+  const { userDetails, mutateUser, isUserByIdLoading, isAuthLoading } =
     useUser()
-  const isLoading = isLoadingPosts || !userDetails || isUserByIdLoading
+  const isLoading = isLoadingPosts || isAuthLoading
   return (
     <RootLayout>
       <Header auth={userDetails} mutate={mutateUser} />
