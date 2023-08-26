@@ -4,6 +4,7 @@ import PostCard from "@/components/PostCard"
 import usePost from "@/hooks/usePost"
 import useUser from "@/hooks/useUser"
 import RootLayout from "./layout"
+import PostForm from "@/components/PostForm"
 
 export default function Home() {
   const { posts, isLoadingPosts } = usePost()
@@ -13,6 +14,9 @@ export default function Home() {
   return (
     <RootLayout>
       <Header auth={userDetails} mutate={mutateUser} />
+      <div className="my-2 w-[50%] p-16">
+        <PostForm />
+      </div>
       <main className="min-h-screen p-16">
         {isLoading ? (
           <div className="flex min-h-screen justify-center items-center">
